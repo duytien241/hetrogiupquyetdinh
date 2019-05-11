@@ -1,36 +1,28 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <title>Trợ giúp quyết định</title>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Lab6</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="../css/bootstrap.min.css" rel="stylesheet"/>
     <script src="../js/jquery.min.js"></script>
-    <link rel="stylesheet" href="../css/style.css">
-    <script src="../js/index.js"></script>
-</head>
+    <script type="text/javascript">
+    document.getElementById('client-result-final').style.visibility = "hidden";
+            function showdetail() {
+                document.getElementById('client-result-final').style.visibility = "visible";
+            }
+           
+      </script>
 
+</head>
 <body>
 
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">Nhóm 4</a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li class="active">
-                    <a href="#">Trang chủ</a>
-                </li>
-                <li>
-                    <a href="#">Điểm chuẩn</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-    <div class="container" style="min-height:900px;">
-        < <div id="bangketqua" class="col-sm-8 col-sm-offset-2">
+<nav class="navbar navbar-default">
+<div id="bangketqua" class="col-sm-8 col-sm-offset-2">
             <h1 class="text-center text-uppercase">
                 <strong>Bảng kết quả</strong>
             </h1>
@@ -47,7 +39,6 @@
                 </thead>
                 <tbody>
                     <?php
-                    session_start();
                     $t=1;
                     foreach($_SESSION['matrix'] as $i){
                         echo'<tr><td>'.$t++.'</td>
@@ -56,7 +47,7 @@
                         <td>'.round($i['sothich'],3).'</td>
     
                         <td>'.round($i['dodo'],3).'</td></tr>';
-                        if($t==11) break;
+                        if($t==10) break;
                     }
                     ?>
                 </tbody>
@@ -65,12 +56,12 @@
                 <button type="button" id="load-more" class="btn btn-info">
                     Xem thêm
                 </button>
-                <button type="button" id="btn-result" class="btn btn-info" onClick ="showdetail()">
+                <button type="button" id="chitiet" class="btn btn-info" onClick ="showdetail()">
                     Xem chi tiết
                 </button>
             </div>
         </div>
-    
+        </div>
 
         <div id="client-result-final" class="col-sm-8 col-sm-offset-2">
             <h1 class="text-center text-uppercase">
@@ -116,10 +107,43 @@
     </div>
 </div>
 
-        
-    </div>
+            <div id="xemthem" class="col-sm-8 col-sm-offset-2">
+                <h1 class="text-center text-uppercase">
+                    <strong>Bảng chuẩn hóa</strong>
+                </h1>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Viện</th>
+                            <th>Sở thích</th>
+                            <th>Chênh lệch với 2014</th>
+                            <th>Chênh lệch với 2015</th>
+                            <th>Chênh lệch với 2016</th>
+                            <th>Chênh lệch với 2016</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        echo'<tr>';
+                        foreach($_SESSION['max'] as $i){
+                            echo'<td>'.$i.'</td>';
+                            
+                            }
+                        echo '</tr>';  
+                        foreach($_SESSION['min'] as $i){
+                            echo'<td>'.$i.'</td>';
+                            
+                            }
+                        echo '</tr>';    
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+</div>
+
     <script src="../js/jquery.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
-</body>
 
+</body>
 </html>

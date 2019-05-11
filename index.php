@@ -194,15 +194,7 @@
 
                     </div>
                 </div>
-                <!-- <div class="form-group row">
-          <div class="col-sm-2">
-            <label for="">Điểm ưu tiên</label>
-          </div>
-          <div class="col-sm-8">
-            <input type="text" name="" id="" class="form-control" placeholder="Hãy nhập điểm ư">
-          </div>
-        </div> -->
-
+                
                 <div class="form-group row">
                     <div class="col-sm-2">
                     </div>
