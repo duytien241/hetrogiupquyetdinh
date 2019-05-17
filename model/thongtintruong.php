@@ -15,7 +15,7 @@ function getThongTinNganh($conn,$query,$sothich,$hedaotao,$diachi,$hocphi){
         $item = array(
             'tenTruong' => $resTruong['ten'],
             'tenNganh' => $res['ten'],
-            'hocphi' => $res['hocphi'] - $hocphi,
+            'hocphi' => $res['hocphi'] ,
             'id_nganh' => $res['id_nganh'],
             'sothich' => $diemst,
             'daotao' => $diemdt,

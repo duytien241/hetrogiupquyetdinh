@@ -18,8 +18,8 @@
     $tsnam2017 = 0.15;
     $tsnam2018 = 0.15;
     $tsdiachi = 0.1;
-    $tshocphi = 0.1;
-    $tshedaotao = 0.15;
+    $tshocphi = 0.15;
+    $tshedaotao = 0.1;
 
     $query = "select distinct a.* from nganh as a, diemchuan as b where a.id_nganh = b.id_nganh and b.khoi like '%".$khoi."%'";
     //st = 0.2
@@ -44,7 +44,7 @@
     }
     elseif($trongsodt <=2){
         
-        $tshedaotao -= (3-$trongsodt)*0.05;
+        $tshedaotao -= (2-$trongsodt)*0.05;
         if($trongsost == 4 || $trongsost ==0){
             if($trongsodt ==2){
                 $tsnam2018 += 0.05;     //0.15
@@ -101,14 +101,14 @@
     }
     $trongso = array($tssothich,$tsnam2016,$tsnam2017,$tsnam2018,$tsdiachi,$tshedaotao,$tshocphi);
     $_SESSION['trongso'] = $trongso;
-    // echo '\so thich:'.$tssothich . ';';
-    // echo '\2018:'.$tsnam2018. ';';
-    // echo '\2017:'.$tsnam2017. ';';
-    // echo '\2016:'.$tsnam2016. ';';
-    // echo '\diachi:'.$tsdiachi. ';';
-    // echo '\hp:'.$tshocphi. ';';
-    // echo '\daotao:'.$tshedaotao. ';';
-    // echo $tssothich + $tsnam2018 + $tsnam2017 + $tsnam2016 + $tsdiachi +$tshocphi + $tshedaotao;
+    echo '\so thich:'.$tssothich . ';';
+    echo '\2018:'.$tsnam2018. ';';
+    echo '\2017:'.$tsnam2017. ';';
+    echo '\2016:'.$tsnam2016. ';';
+    echo '\diachi:'.$tsdiachi. ';';
+    echo '\hp:'.$tshocphi. ';';
+    echo '\daotao:'.$tshedaotao. ';';
+    echo $tssothich + $tsnam2018 + $tsnam2017 + $tsnam2016 + $tsdiachi +$tshocphi + $tshedaotao;
     $conn = connectDB();
     session_start();
     $matrix = getThongTinNganh($conn,$query,$sothich,$hedaotao,$diachi,$hocphi);
@@ -144,6 +144,8 @@
             $matrix[$i]['daotao'] /= sqrt($tmp[4]);
             else $matrix[$i]['daotao'] = 0;
             $matrix[$i]['khoangcach'] /= sqrt($tmp[5]);
+            echo $matrix[$i]['hocphi'];
+            
             if($tmp[6]==0) $matrix[$i]['hocphi'] =0;
             else $matrix[$i]['hocphi'] /= sqrt($tmp[6]);
             
@@ -158,8 +160,10 @@
             $matrix[$i]['daotao'] *= $tshedaotao;
             $matrix[$i]['khoangcach'] *= $tsdiachi;
             $matrix[$i]['hocphi'] *= $tshocphi;
+         
             
         }
+        
         // tính max min
         $max = array(LayGiaTriLon($matrix,'sothich'),LayGiaTriLon($matrix,'2016'),LayGiaTriLon($matrix,'2017'),LayGiaTriLon($matrix,'2018'),LayGiaTriLon($matrix,'daotao'),LayGiaTriLon($matrix,'khoangcach'),LayGiaTriLon($matrix,'hocphi'));
         $min = array(LayGiaTriNho($matrix,'sothich'),LayGiaTriNho($matrix,'2016'),LayGiaTriNho($matrix,'2017'),LayGiaTriNho($matrix,'2018'),LayGiaTriNho($matrix,'daotao'),LayGiaTriNho($matrix,'khoangcach'),LayGiaTriNho($matrix,'hocphi'));
@@ -172,6 +176,7 @@
         for( $i = 0 ; $i< sizeof($matrix); $i++){
             $matrix[$i]['dodo'] = $kcmin[$i]/($kcmax[$i]+$kcmin[$i]);
         }
+        
         $_SESSION['max'] =$max;
         $_SESSION['min'] =$min;
         usort($matrix, function($a, $b) {

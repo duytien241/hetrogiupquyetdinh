@@ -30,7 +30,7 @@
     </nav>
 
     <div class="container" style="min-height:900px;">
-        < <div id="bangketqua" class="col-sm-8 col-sm-offset-2">
+         <div id="bangketqua" class="col-sm-8 col-sm-offset-2">
             <h1 class="text-center text-uppercase">
                 <strong>Bảng kết quả</strong>
             </h1>
@@ -40,9 +40,8 @@
                         <th>STT</th>
                         <th>Viện</th>
                         <th>Trường</th>
-                        <th>Sở Thích</th>
                         
-                        <th>Độ do</th>
+                        <th>Độ phù hợp</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -53,10 +52,9 @@
                         echo'<tr><td>'.$t++.'</td>
                         <td>'.$i['tenNganh'].'</td>
                         <td>'.$i['tenTruong'].'</td>
-                        <td>'.round($i['sothich'],3).'</td>
-    
-                        <td>'.round($i['dodo'],3).'</td></tr>';
-                        if($t==11) break;
+                        
+                        <td>'.round($i['dodo']*100,3).' % </td></tr>';
+                        if($t==21) break;
                     }
                     ?>
                 </tbody>
